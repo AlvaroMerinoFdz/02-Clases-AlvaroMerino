@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _02_Clases_AlvaroMerino
 {
-    class Libro
+    public class Libro
     {
         public Libro(String titulo, String autor, String Estilo, String editorial)
         {

@@ -12,19 +12,6 @@ namespace _02_Clases_AlvaroMerino
             int dia = 0, mes = 0, anio = 0;
             do
             {
-                Console.WriteLine("Introduzca el año");
-                valido = int.TryParse(Console.ReadLine(), out anio);
-                if (!valido) Console.WriteLine("Introduzca el año otra vez");
-            } while (!valido);
-            do
-            {
-                Console.WriteLine("Introduzca el mes");
-                valido = int.TryParse(Console.ReadLine(), out mes);
-                if (mes > 12) valido = false;
-                if (!valido) Console.WriteLine("Introduzca el mes otra vez");
-            } while (!valido);
-            do
-            {
                 Console.WriteLine("Introduzca el día");
                 valido = int.TryParse(Console.ReadLine(), out dia);
                 if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)
@@ -50,16 +37,25 @@ namespace _02_Clases_AlvaroMerino
                 }
                 if (!valido) Console.WriteLine("Introduzca el dia otra vez");
             } while (!valido);
-
-
-
+            do
+            {
+                Console.WriteLine("Introduzca el mes");
+                valido = int.TryParse(Console.ReadLine(), out mes);
+                if (mes > 12) valido = false;
+                if (!valido) Console.WriteLine("Introduzca el mes otra vez");
+            } while (!valido);
+            do
+            {
+                Console.WriteLine("Introduzca el año");
+                valido = int.TryParse(Console.ReadLine(), out anio);
+                if (!valido) Console.WriteLine("Introduzca el año otra vez");
+            } while (!valido);
 
             DateTime fecha = new DateTime(anio, mes, dia);
 
             return fecha;
 
         }
-
 
         public static void menu()
         {
@@ -88,7 +84,7 @@ namespace _02_Clases_AlvaroMerino
                     case 1:
                         Console.WriteLine("Mostrando dia de la semana");
                         fecha = introducirFecha();
-                        Console.WriteLine("El dia de la semana es: " + fecha.DayOfWeek);
+                        Console.WriteLine("El dia de la semana es: " + fecha.ToString("dddd",new CultureInfo("es-ES")));
                         break;
                     case 2:
                         Console.WriteLine("Incrementando fecha");
@@ -101,7 +97,7 @@ namespace _02_Clases_AlvaroMerino
                             if (!valido) Console.WriteLine("Introduzca los dias que desea aumentar otra vez");
                         } while (!valido);
                         fecha = fecha.AddDays(numDias);
-                        Console.WriteLine("La nueva fecha es " + fecha.ToString());
+                        Console.WriteLine("La nueva fecha es :" + fecha.ToString());
                         break;
                     case 3:
                         Console.WriteLine("Resta fecha");
@@ -114,20 +110,21 @@ namespace _02_Clases_AlvaroMerino
                             if (!valido) Console.WriteLine("Introduzca los dias que desea restar otra vez");
                         } while (!valido);
                         fecha = fecha.AddDays(-numeroDias);
-                        Console.WriteLine("La nueva fecha es " + fecha.ToString());
+                        Console.WriteLine("La nueva fecha es :" + fecha.ToString());
                         break;
                     case 4:
                         Console.WriteLine("Vamos a comparar 2 fechas.");
                         fecha = introducirFecha();
+                        Console.WriteLine("Introduzca ahora la 2a fecha.");
                         DateTime fecha1 = introducirFecha();
                         int resultado = (DateTime.Compare(fecha, fecha1));
                         if (resultado < 0)
                         {
-                            Console.WriteLine("La mayor es" + fecha1.ToString());
+                            Console.WriteLine("La mayor es: " + fecha1.ToString("d", CultureInfo.CreateSpecificCulture("en-NZ")));
                         }
                         else if (resultado > 0)
                         {
-                            Console.WriteLine("La mayor es" + fecha.ToString());
+                            Console.WriteLine("La mayor es: "  + fecha.ToString("d", CultureInfo.CreateSpecificCulture("en-NZ")));
                         }
                         else
                         {
@@ -136,15 +133,13 @@ namespace _02_Clases_AlvaroMerino
                         break;
                     case 5:
                         fecha = introducirFecha();
-                        Console.WriteLine(fecha.ToString("D"), CultureInfo.CreateSpecificCulture("es-MX"));
+                        Console.WriteLine(fecha.ToString("D"), CultureInfo.CreateSpecificCulture("es-ES"));
                         break;
                     case 6:
                         Console.WriteLine("VOLVEMOS AL MENÚ PRINCIPAL");
                         break;
                 }
             } while (opcion != 6);
-
         }
-
     }
 }
